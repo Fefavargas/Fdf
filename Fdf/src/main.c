@@ -12,18 +12,6 @@
 
 #include "fdf.h"
 
-int	open_file(t_fdf *fdf)
-{
-	int	fd;
-	int	i;
-
-	if (!check_file(fdf->filename))
-		return (0);
-	if ((fdf->fd = open(fdf->filename, O_RDONLY)) == -1)
-		return (0);
-	return (1);
-}
-
 void	inicialize(char *str, t_fdf *fdf)
 {
 	fdf->filename = (char *)ft_calloc((ft_strlen(str) + 1), sizeof(char));
@@ -33,20 +21,8 @@ void	inicialize(char *str, t_fdf *fdf)
 		return ;
 	}
 	ft_strlcpy(fdf->filename, str, ft_strlen(str));
-	fdf->z = 0;
-}
-
-void	init_mlx(t_fdf	*fdf)
-{
-	fdf->mlx = mlx_init();
-	if (!fdf->mlx)
-		return ;
-	fdf->window = mlx_new_window(fdf->mlx, WINDOW_W, WINDOW_H, WINDOW_TITLE);
-	if (!fdf->window)
-		return ;
-	fdf->img.img = mlx_new_image(fdf->mlx,WINDOW_W, WINDOW_H);
-	fdf->img.data = mlx_get_data_addr( fdf->img.img, &fdf->img.bpp, &fdf->img.size_len, 
-					&fdf->img.endian);
+	fdf->map = ft_calloc(sizeof(t_map), 1);
+	fdf->map->y = 0;
 }
 
 #include <stdio.h>
@@ -57,12 +33,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	inicialize(argv[1], &fdf);
-	printf("%s", fdf.filename);
-	if (open_file(&fdf))
+	if (!read_file(&fdf))
 		return (0);
-	if (read_file_get_xy(&fdf))
-		return (0);
-	if (read_file_get_z(&fdf))
-		return (0);
+	
 	return (0);
 }

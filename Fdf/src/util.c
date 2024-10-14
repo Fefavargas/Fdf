@@ -14,7 +14,7 @@
 
 int	is_empty(char c)
 {
-	if (c == ' ' || c == '\n')
+	if (c == ' ' || c == '\n' || c == ',')
 		return (1);
 	return (0);
 }
@@ -36,4 +36,13 @@ int	count_words(char *s)
 			i++;
 	}
 	return (count);
+}
+
+int	open_file(t_fdf *fdf)
+{
+	if (!check_file(fdf->filename))
+		return (0);
+	if ((fdf->fd = open(fdf->filename, O_RDONLY)) == -1)
+		return (0);
+	return (1);
 }

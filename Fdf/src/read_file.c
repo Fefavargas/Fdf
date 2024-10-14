@@ -13,7 +13,44 @@
 #include "fdf.h"
 #include "../get_next_line/get_next_line.h"
 
-int	update_value(int *z, char *str, int size, int index)
+static int	get_digit(char c, int digit_base)
+{
+	int	max_digit;
+
+	if (digit_base <= 10)
+		max_digit = digit_base + '0';
+	else
+		max_digit = digit_base - 11 + 'a';
+	if (c >= '0' && c <= '9' && c <= max_digit)
+		return (c - '0');
+	else if (c >= 'a' && c <= 'f' && c <= max_digit)
+		return (10 + c - 'a');
+	else
+		return (-1);
+}
+
+int	get_color(char *str)
+{
+	int	color;
+	int i;
+
+	if (!ft_strncmp(str, "0x", 2) || !ft_strncmp(str, "0X", 2))
+	{
+		i = 2;
+		color = 0;
+		while (str[i])
+		{
+			color *= 16;
+			color += get_digit(str[i], 16);
+			i++;
+		}
+		if (color >= 0 && color <= 16777215)
+			return (color);
+	}
+	return (-1);
+}
+
+int	update_value(t_fdf *fdf, char *str, int size, int index)
 {
 	char	*str_nbr;
 
@@ -26,18 +63,18 @@ int	update_value(int *z, char *str, int size, int index)
 		free(str_nbr);
 		return (0);
 	}
-	z[index] = ft_atoi(str_nbr);
+	fdf->map->array[index][fdf->map->y][0] = ft_atoi(str_nbr);
+	if (str[size] && str[size + 1] && str[size + 1] == ',')
+		fdf->map->array[index][fdf->map->y][1] = get_color(str[size + 2]);
 	free(str_nbr);
 	return (1);
 }
 
-int	split_mult(char *s, int *z)
+int	split_mult(char *s, t_fdf *fdf)
 {
 	int		i;
 	int		index;
 	int		count;
-	int		nbr;
-	char	*str_nbr;
 
 	i = 0;
 	index = 0;
@@ -46,11 +83,11 @@ int	split_mult(char *s, int *z)
 		count = 0;
 		while (s[i] && is_empty(s[i]))
 			i++;
-		while (s[i] && !is_empty(s[i]))
+		while (s[i] && !is_empty(s[i++]))
 			count++;
 		if (count)
 		{
-			if (!update_value(z, &s[i], count, index))
+			if (!update_value(fdf, &s[i-count], count, index))
 				return (0);
 			index++;
 		}
@@ -60,54 +97,22 @@ int	split_mult(char *s, int *z)
 	return (1);
 }
 
-int	read_file_get_xy(t_fdf *fdf)
+int	read_file(t_fdf *fdf)
 {
-	int		y;
-	int		x;
 	char	*str;
 
-	while ((str = get_next_line(fdf->fd)))
-	{
-		fdf->y++;
-		x = count_words(str);
-		if (fdf->x == 0)
-			fdf->x = x;
-		else if (fdf->x != x)
-		{
-			error(fdf);
-			return (0);
-		}
-		free(str);
-	}
-	get_next_line(-1);
-	close(fdf->fd);
-	return (check_x_y(fdf));
-}
-
-int	read_file_get_z(t_fdf *fdf)
-{
-	int		count_y;
-	int		count_x;
-	char	*str;
-
-	count_y = 0;
-	fdf->z = (int **)ft_calloc(sizeof(int *), (fdf->y));
-	if (fdf->z)
+	if(!inic_map(fdf))
 		return (0);
-	fdf->fd = open(fdf->filename, O_RDONLY);
-	if (fdf->fd == -1)
+	if (!open_file(fdf))
 		return (0);
-	while ((str = get_next_line(fdf->fd)))
+	while (str = get_next_line(fdf->fd))
 	{
-		fdf->z[count_y] = (int *)ft_calloc(sizeof(int), fdf->x);
-		if (!fdf->z[count_y])
-			return (0);
-		if (!split_mult(str, (fdf->z[count_y])))
+		if (!split_mult(str, &fdf))
 		{
 			free_fd(fdf);
 			return (0);
 		}
-		count_y++;
+		fdf->map->y++;
 	}
 	get_next_line(-1);
 	close(fdf->fd);

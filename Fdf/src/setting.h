@@ -13,8 +13,25 @@
 #ifndef	SETTING_H
 # define SETTING_H
 
-# define WINDOW_W	1440
-# define WINDOW_H	900
+# define WINDOW_W	1920
+# define WINDOW_H	1080
 # define WINDOW_TITLE "FDF by Fefa"
+
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define ARROW_DOWN 125
+# define ARROW_UP 126
+
+# define MINUS 27
+# define PLUS 24
+# define SPACE 49
+# define KEY_R 15
+
+# define MOUSE_CLICK_LEFT 1
+# define MOUSE_CLICK_RIGHT 2
+# define MOUSE_CLICK_MIDDLE 3
+# define MOUSE_WHEEL_UP 4
+# define MOUSE_WHEEL_DOWN 5
+# define ESCAPE 53
 
 #endif

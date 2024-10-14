@@ -35,17 +35,17 @@ int	check_file(char *str)
 	}
 	return (-1);
 }
-
+/*
 int	check_x_y(t_fdf *fdf)
 {
-	if (!fdf->x || !fdf->y)
+	if (!fdf->map->x || !fdf->map->y)
 	{
 		error(fdf);
 		return (0);
 	}
 	return (1);
 }
-
+*/
 int	check_nbr(char *str)
 {
 	size_t	j;
