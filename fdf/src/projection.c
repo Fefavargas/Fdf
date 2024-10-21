@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/12 20:50:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/21 19:21:22 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_point	project(int x, int y, t_fdf *fdf)
 	ft_rotate_y(&point.x, &point.z, fdf->camera->y_angle);
 	ft_rotate_z(&point.x, &point.y, fdf->camera->z_angle);
 	if (fdf->camera->iso)
-		iso(&point.x, &point.y, &point.z);
+		iso(&point.x, &point.y, point.z);
 	point.x += WINDOW_W / 2 + fdf->camera->x_offset;
 	point.y += (WINDOW_H + fdf->map->y * fdf->camera->zoom) / 2 + fdf->camera->y_offset;
 	return (point);

@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 19:15:28 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/21 19:20:36 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ void	ft_draw(t_fdf *fdf);
 //mouse.c
 int		ft_mouse_move(int x, int y, t_fdf *fdf);
 int		ft_mouse(int buttom, int x, int y, t_fdf *fdf);
-int		ft_close_win(void *params);
+int		ft_close_win(t_fdf *fdf);
 
 #endif

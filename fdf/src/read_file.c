@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 19:12:45 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/21 19:21:52 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	update_value(t_fdf *fdf, char *str, int size, int index)
 	free(str_nbr);
 	if (str[size] && str[size + 1] && str[size + 1] == ',')
 	{
-		color = get_color(str[size + 2]);
+		color = get_color(&str[size + 2]);
 		if (color == -1)
 			return (0);
 		fdf->map->array[index][fdf->map->y][1] = color;
