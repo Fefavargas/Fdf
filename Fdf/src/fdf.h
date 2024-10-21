@@ -90,11 +90,13 @@ int		check_nbr(char *str);
 //error.c
 void	free_fd(t_fdf *fdf);
 //inicialize.c
-int	inic_map(t_fdf *fdf);
+int		inic_map(t_fdf *fdf);
 void	init_mlx(t_fdf	*fdf);
 //util.c
 int		is_empty(char c);
 int		count_words(char *s);
 int		open_file(t_fdf *fdf);
+//projection.c
+t_point	project(int x, int y, t_fdf *fdf);
 
 #endif

@@ -21,3 +21,17 @@ void	hook_control(t_fdf *fdf)
 	mlx_hook(fdf->win, 17, 0, ft_close_win, fdf);*/
 }
 
+int	handle_keypress(int keycode, t_fdf *fdf)
+{
+	if (keycode == KEY_ESC)
+		free_fd(fdf);
+	return (0);
+}
+
+/*window destruction, */
+int	handle_x(t_fdf *fdf)
+{
+	free_fd(fdf);
+	return (0);
+}
+

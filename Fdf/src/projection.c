@@ -41,6 +41,17 @@ void	ft_rotate_z(int *x, int *y, double z_angle)
 	*y = prev_x * sin(z_angle) + prev_y * cos(z_angle);
 }
 
+void	iso(int *x, int *y, int z)
+{
+	int prev_x;
+	int prev_y;
+
+	prev_x = *x;
+	prev_y = *y;
+	*x = (prev_x - prev_y) * cos(0.523599);
+	*y = (prev_x + prev_y) * sin(0.523599) - z;
+}
+
 t_point	project(int x, int y, t_fdf *fdf)
 {
     t_point	point;
@@ -54,6 +65,8 @@ t_point	project(int x, int y, t_fdf *fdf)
 	ft_rotate_x(&point.y, &point.z, fdf->camera->x_angle);
 	ft_rotate_y(&point.x, &point.z, fdf->camera->y_angle);
 	ft_rotate_z(&point.x, &point.y, fdf->camera->z_angle);
+	if (fdf->camera->iso)
+		iso(&point.x, &point.y, &point.z);
 	point.x += WINDOW_W / 2 + fdf->camera->x_offset;
 	point.y += (WINDOW_H + fdf->map->y * fdf->camera->zoom) / 2 + fdf->camera->y_offset;
 	return (point);

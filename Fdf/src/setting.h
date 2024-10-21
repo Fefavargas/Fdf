@@ -34,4 +34,6 @@
 # define MOUSE_WHEEL_DOWN 5
 # define ESCAPE 53
 
+# define KEY_ESC 0 //corrigir
+
 #endif

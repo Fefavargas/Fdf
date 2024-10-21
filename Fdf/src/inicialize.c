@@ -61,9 +61,9 @@ int	init_mlx(t_fdf	*fdf)
 	fdf->win = mlx_new_window(fdf->mlx, WINDOW_W, WINDOW_H, WINDOW_TITLE);
 	if (!fdf->win)
 		return (0);
-	fdf->img.img = mlx_new_image(fdf->mlx,WINDOW_W, WINDOW_H);
-	fdf->img.data = mlx_get_data_addr( fdf->img.img, &fdf->img.bpp, &fdf->img.size_len, 
-					&fdf->img.endian);
+	fdf->img->img = mlx_new_image(fdf->mlx,WINDOW_W, WINDOW_H);
+	fdf->img->data = mlx_get_data_addr( fdf->img->img, &fdf->img->bpp, &fdf->img->size_len, 
+					&fdf->img->endian);
 	return (1);
 }
 

@@ -35,6 +35,6 @@ int	main(int argc, char **argv)
 	inicialize(argv[1], &fdf);
 	if (!read_file(&fdf))
 		return (0);
-	
+	init_mlx(fdf);
 	return (0);
 }
