@@ -6,13 +6,13 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/21 17:25:18 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:57:12 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int init_array(t_fdf *fdf)
+int	init_array(t_fdf *fdf)
 {
 	int	i;
 
@@ -38,17 +38,20 @@ int	init_map(t_fdf *fdf)
 
 	if (!open_file(fdf))
 		return (0);
-	while (str = get_next_line(fdf->fd))
+	y = 0;
+	str = get_next_line(fdf->fd);
+	fdf->map->x = count_words(str);
+	while (str && ++y)
 	{
 		x = count_words(str);
-		if (fdf->map->x == 0)
-			fdf->map->x = x;
-		else if (fdf->map->x != x)
+		if (fdf->map->x != x)
 		{
 			get_next_line(-1);
+			free(str);
 			return (0);
 		}
-		y++;
+		free(str);
+		str = get_next_line(fdf->fd);
 	}
 	get_next_line(-1);
 	close(fdf->fd);

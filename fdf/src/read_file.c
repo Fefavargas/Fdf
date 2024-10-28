@@ -6,12 +6,11 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 19:21:52 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:11:27 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "../get_next_line/get_next_line.h"
 
 int	open_file(t_fdf *fdf)
 {

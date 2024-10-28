@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:06:52 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 19:12:53 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:38:07 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ int	get_digit(char c, int digit_base)
 		return (-1);
 }
 
-int ft_abs(int a)
+int	ft_abs(int a)
 {
 	if (a < 0)
 		return (-a);
-	return (a);	
+	return (a);
 }
 
 int	ft_min(int a, int b)
 {
 	if (a < b)
 		return (a);
-	return (b);	
+	return (b);
 }

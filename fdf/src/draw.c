@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:12:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/21 19:04:15 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:18:53 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_lerp(int first, int second, double p)
 	return ((int)((double)first + (second - first) * p));
 }
 
-int	get_color(int x, t_point ini, t_point fin, float factor)
+int	get_color_rgb(int x, t_point ini, t_point fin, float factor)
 {
 	int r;
 	int g;
@@ -72,7 +72,7 @@ void	draw_line(t_fdf *fdf, t_point ini, t_point fin)
 	tmp = fin;
 	while (tmp.x != ini.x || tmp.y != ini.y)
 	{
-		put_pixel(tmp.x, tmp.y, get_color(tmp.x, ini, fin ,deltay), fdf);
+		put_pixel(tmp.x, tmp.y, get_color_rgb(tmp.x, ini, fin ,deltay), fdf);
 		if ((error1 = error0 * 2) > - deltay)
 		{
 			error0 -= deltay;

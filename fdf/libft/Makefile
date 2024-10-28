@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+         #
+#    By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 23:46:46 by fvargas           #+#    #+#              #
-#    Updated: 2024/07/17 23:52:09 by fvargas          ###   ########.fr        #
+#    Updated: 2024/10/24 15:02:50 by fefa             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS =			ft_isalpha.c \
 				ft_putstr_fd.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
+				get_next_line.c
 
 OBJS =			${SRCS:.c=.o}
 

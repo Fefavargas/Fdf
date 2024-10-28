@@ -6,32 +6,40 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:18:47 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 19:12:44 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:14:53 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-int	read_file(t_fdf *fdf)
+void	inic(t_fdf *fdf)
 {
 	char	*str;
 
-	if (!init_map(fdf))
-		return (0);
 	if (!open_file(fdf))
-		return (0);
-	while (str = get_next_line(fdf->fd))
+		return ;
+	str = get_next_line(fdf->fd);
+	while (str)
 	{
-		if (!split_mult(str, &fdf))
+		if (!split_mult(str, fdf))
 		{
 			get_next_line(-1);
-			return (0);
+			free(str);
+			return ;
 		}
+		free(str);
+		str = get_next_line(fdf->fd);
 		fdf->map->y++;
 	}
 	get_next_line(-1);
 	close(fdf->fd);
+}
+
+int	read_file(t_fdf *fdf)
+{
+	if (!init_map(fdf))
+		return (0);
+	inic(fdf);
 	ft_z_min_max(fdf);
 	return (1);
 }

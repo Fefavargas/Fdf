@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 19:20:36 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:14:47 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct s_fdf
 
 //read_file.c
 int		open_file(t_fdf *fdf);
+int		split_mult(char *s, t_fdf *fdf);
+void	ft_z_min_max(t_fdf *fdf);
 //checker.c
 void	error(t_fdf *fdf);
 int		check_file(char *array);
