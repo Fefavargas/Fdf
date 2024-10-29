@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/28 21:11:27 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:57:41 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	open_file(t_fdf *fdf)
 {
 	if (!check_file(fdf->filename))
 		return (0);
-	if ((fdf->fd = open(fdf->filename, O_RDONLY)) == -1)
+	fdf->fd = open(fdf->filename, O_RDONLY);
+	if (fdf->fd == -1)
 		return (0);
 	return (1);
 }

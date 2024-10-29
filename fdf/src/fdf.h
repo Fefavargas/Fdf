@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/28 21:14:47 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:41:35 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h> //free
 # include <limits.h> //INT_MIN INT_MAX
 # include "../minilibx-linux/mlx.h" //MiniLibX
+# include "../minilibx-linux/mlx_int.h" //MiniLibX
 # include <math.h> //sin, cos
 # include "setting.h"
 
@@ -31,14 +32,14 @@ typedef struct s_point
 	int	y;
 	int	z;
 	int	color;
-}t_point;
+}	t_point;
 
 typedef struct s_mouse
 {
 	int	button;
 	int	x;
 	int	y;
-}t_mouse;
+}	t_mouse;
 
 typedef struct s_camera
 {
@@ -50,16 +51,16 @@ typedef struct s_camera
 	int		x_offset;
 	int		y_offset;
 	int		iso;
-}t_camera;
+}	t_camera;
 
-typedef struct s_img
+typedef struct s_image
 {
 	void	*img;
 	char	*data;
 	int		bpp;
 	int		size_len;
 	int		endian;
-}t_img;
+}	t_image;
 
 typedef struct s_map
 {
@@ -68,8 +69,7 @@ typedef struct s_map
 	int	***array;
 	int	z_min;
 	int	z_max;
-}t_map;
-
+}	t_map;
 
 typedef struct s_fdf
 {
@@ -78,10 +78,10 @@ typedef struct s_fdf
 	t_map		*map;
 	void		*mlx;
 	void		*win;
-	t_img		*img;
+	t_image		*img;
 	t_camera	*camera;
 	t_mouse		*mouse;
-}t_fdf;
+}	t_fdf;
 
 //read_file.c
 int		open_file(t_fdf *fdf);

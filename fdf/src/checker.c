@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:36:41 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/01 20:17:26 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:02:15 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	check_x_y(t_fdf *fdf)
 	return (1);
 }
 */
+
 int	check_nbr(char *str)
 {
 	size_t	j;

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   setting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:00:25 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 18:33:03 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 19:59:36 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	SETTING_H
 # define SETTING_H
 
-# define WINDOW_W	1920
-# define WINDOW_H	1080
+# define WINDOW_W 1920
+# define WINDOW_H 1080
 # define WINDOW_TITLE "FDF by Fefa"
 
 # define ARROW_LEFT 123

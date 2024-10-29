@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:21:26 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/21 18:20:02 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:16:53 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_fd(t_fdf *fdf)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	free(fdf->filename); // inside?
 	free(fdf->camera);

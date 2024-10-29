@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:12:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/28 21:18:53 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:55:44 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_lerp(int first, int second, double p)
 
 int	get_color_rgb(int x, t_point ini, t_point fin, float factor)
 {
-	int r;
-	int g;
-	int b;
+	int		r;
+	int		g;
+	int		b;
 	float	percent;
 
 	percent = ft_abs(x - ini.x) / ft_abs(fin.x - ini.x);
@@ -59,11 +59,11 @@ void	put_pixel(int x, int y, int color, t_fdf *fdf)
 
 void	draw_line(t_fdf *fdf, t_point ini, t_point fin)
 {
-	float deltax;
-	float deltay;
-	int error1;
-	int error0;
-	t_point tmp;
+	float	deltax;
+	float	deltay;
+	int		error1;
+	int		error0;
+	t_point	tmp;
 
 //no original aqui tem um abs para o delta. mas eu considero que estao sempre passando a posição x, y e x+1, y dps x, y e x, y+1
 	deltax = fin.x - ini.x;
@@ -72,8 +72,9 @@ void	draw_line(t_fdf *fdf, t_point ini, t_point fin)
 	tmp = fin;
 	while (tmp.x != ini.x || tmp.y != ini.y)
 	{
-		put_pixel(tmp.x, tmp.y, get_color_rgb(tmp.x, ini, fin ,deltay), fdf);
-		if ((error1 = error0 * 2) > - deltay)
+		put_pixel(tmp.x, tmp.y, get_color_rgb(tmp.x, ini, fin, deltay), fdf);
+		error1 = error0 * 2;
+		if (error1 > -deltay)
 		{
 			error0 -= deltay;
 			tmp.x += 1;
@@ -86,11 +87,10 @@ void	draw_line(t_fdf *fdf, t_point ini, t_point fin)
 	}
 }
 
-
 void	ft_draw(t_fdf *fdf)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	ft_bzero(fdf->img->data, WINDOW_H * WINDOW_W * fdf->img->bpp / 8);
 	x = 0;

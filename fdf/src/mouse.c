@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 13:17:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/21 19:20:42 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:10:00 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ int	ft_mouse(int buttom, int x, int y, t_fdf *fdf)
 {
 	if (buttom == MOUSE_WHEEL_UP || buttom == MOUSE_WHEEL_DOWN)
 		ft_zoom(buttom, fdf);
-	else if (buttom == MOUSE_CLICK_LEFT || buttom == MOUSE_CLICK_RIGHT 
-				|| buttom == MOUSE_CLICK_MIDDLE)
+	else if (buttom == MOUSE_CLICK_LEFT || buttom == MOUSE_CLICK_RIGHT)
+	{
+		fdf->mouse->button = buttom;
+		fdf->mouse->x = x;
+		fdf->mouse->y = y;
+	}
+	else if (buttom == MOUSE_CLICK_MIDDLE)
 	{
 		fdf->mouse->button = buttom;
 		fdf->mouse->x = x;

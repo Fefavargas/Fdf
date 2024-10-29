@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inicialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/28 20:57:12 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:16:59 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	init_map(t_fdf *fdf)
 
 int	init_mlx(t_fdf	*fdf)
 {
+	t_image	*i;
+
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 		return (0);
@@ -70,8 +72,8 @@ int	init_mlx(t_fdf	*fdf)
 	fdf->img->img = mlx_new_image(fdf->mlx, WINDOW_W, WINDOW_H);
 	if (!fdf->img->img)
 		return (0);
-	fdf->img->data = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, &fdf->img->size_len, 
-						&fdf->img->endian);
+	i = fdf->img;
+	fdf->img->data = mlx_get_data_addr(i, &(i)->bpp, &(i)->size_len, &(i)->endian);
 	if (!fdf->img->data)
 		return (0);
 	return (1);

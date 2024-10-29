@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/21 19:21:22 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/28 20:14:37 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_rotate_z(int *x, int *y, double z_angle)
 
 void	iso(int *x, int *y, int z)
 {
-	int prev_x;
-	int prev_y;
+	int	prev_x;
+	int	prev_y;
 
 	prev_x = *x;
 	prev_y = *y;
@@ -54,8 +54,8 @@ void	iso(int *x, int *y, int z)
 
 t_point	project(int x, int y, t_fdf *fdf)
 {
-    t_point	point;
-	
+	t_point	point;
+
 	if (fdf->map->array[x][y][1] > 0)
 		point.color = fdf->map->array[x][y][1];
 	point.z = fdf->map->array[x][y][0];
@@ -68,6 +68,7 @@ t_point	project(int x, int y, t_fdf *fdf)
 	if (fdf->camera->iso)
 		iso(&point.x, &point.y, point.z);
 	point.x += WINDOW_W / 2 + fdf->camera->x_offset;
-	point.y += (WINDOW_H + fdf->map->y * fdf->camera->zoom) / 2 + fdf->camera->y_offset;
+	point.y += (WINDOW_H + fdf->map->y * fdf->camera->zoom) / 2;
+	point.y += fdf->camera->y_offset;
 	return (point);
 }
