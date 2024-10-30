@@ -6,11 +6,11 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:00:25 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/29 21:56:21 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 01:45:51 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	SETTING_H
+#ifndef SETTING_H
 # define SETTING_H
 
 # define WIDTH 1920

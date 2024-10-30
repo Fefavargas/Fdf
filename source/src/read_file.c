@@ -6,20 +6,70 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 00:04:52 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 01:35:17 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	open_file(t_fdf *fdf)
+int	get_color(char *str)
 {
-	if (!check_file(fdf->filename))
-		return (0);
-	fdf->fd = open(fdf->filename, O_RDONLY);
-	if (fdf->fd == -1)
-		return (0);
-	return (1);
+	int	color;
+	int	i;
+
+	if (!ft_strncmp(str, "0x", 2) || !ft_strncmp(str, "0X", 2))
+	{
+		i = 2;
+		color = 0;
+		while (str[i])
+		{
+			color *= 16;
+			color += get_digit(str[i], 16);
+			i++;
+		}
+		if (color >= 0 && color <= 16777215)
+			return (color);
+	}
+	return (-1);
+}
+
+void	get_value(char *str, int y, t_fdf *fdf)
+{
+	char	**array;
+	int		i;
+	int		j;
+
+	array = ft_split(str, ' ');
+	i = -1;
+	while (array[++i])
+	{
+		fdf->map->array[i][y -1][0] = ft_atoi(array[i]);
+		j = 0;
+		while (array[i][j] && array[i][j] != ',')
+			j++;
+		if (array[i][j] == ',')
+			fdf->map->array[i][y -1][1] = get_color(&array[i][++j]);
+		else
+			fdf->map->array[i][y -1][1] = -1;
+	}
+}
+
+void	get_values_map(t_fdf *fdf)
+{
+	char	*str;
+	int		y;
+
+	open_file(fdf);
+	str = get_next_line(fdf->fd);
+	y = 0;
+	while (str && ++y)
+	{
+		get_value(str, y, fdf);
+		free(str);
+		str = get_next_line(fdf->fd);
+	}
+	get_next_line(-1);
+	close(fdf->fd);
 }
 
 void	ft_z_min_max(t_fdf *fdf)
@@ -43,76 +93,9 @@ void	ft_z_min_max(t_fdf *fdf)
 	}
 }
 
-int	get_color(char *str)
+void	read_file(t_fdf *fdf)
 {
-	int	color;
-	int	i;
-
-	if (!ft_strncmp(str, "0x", 2) || !ft_strncmp(str, "0X", 2))
-	{
-		i = 2;
-		color = 0;
-		while (str[i])
-		{
-			color *= 16;
-			color += get_digit(str[i], 16);
-			i++;
-		}
-		if (color >= 0 && color <= 16777215)
-			return (color);
-	}
-	return (-1);
+	inic_map_xy_array(fdf);
+	get_values_map(fdf);
+	ft_z_min_max(fdf);
 }
-
-// int	update_value(t_fdf *fdf, char *str, int size, int index)
-// {
-// 	char	*str_nbr;
-// 	int		color;
-
-// 	str_nbr = (char *)ft_calloc(sizeof(char), (size + 1));
-// 	if (!str_nbr)
-// 		return (0);
-// 	ft_strlcpy(str_nbr, str, size);
-// 	if (!check_nbr(str_nbr))
-// 	{
-// 		free(str_nbr);
-// 		return (0);
-// 	}
-// 	fdf->map->array[index][fdf->map->y][0] = ft_atoi(str_nbr);
-// 	free(str_nbr);
-// 	if (str[size] && str[size + 1] && str[size + 1] == ',')
-// 	{
-// 		color = get_color(&str[size + 2]);
-// 		if (color == -1)
-// 			return (0);
-// 		fdf->map->array[index][fdf->map->y][1] = color;
-// 	}
-// 	return (1);
-// }
-
-// int	split_mult(char *s, t_fdf *fdf)
-// {
-// 	int		i;
-// 	int		index;
-// 	int		count;
-
-// 	i = 0;
-// 	index = 0;
-// 	while (s[i])
-// 	{
-// 		count = 0;
-// 		while (s[i] && is_empty(s[i]))
-// 			i++;
-// 		while (s[i] && !is_empty(s[i++]))
-// 			count++;
-// 		if (count)
-// 		{
-// 			if (!update_value(fdf, &s[i - count], count, index))
-// 				return (0);
-// 			index++;
-// 		}
-// 		if (!s[i])
-// 			i++;
-// 	}
-// 	return (1);
-// }

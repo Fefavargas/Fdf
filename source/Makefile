@@ -6,7 +6,7 @@
 #    By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 20:36:48 by fvargas           #+#    #+#              #
-#    Updated: 2024/10/29 21:11:28 by fvargas          ###   ########.fr        #
+#    Updated: 2024/10/30 01:48:30 by fvargas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS =		-Wall -Wextra -Werror -g
 LIBFT =			libft/libft.a
 MLX =			minilibx-linux/libmlx.a
 HDRS =			src/fdf.h src/setting.h
-SRCS =			src/checker.c src/draw.c src/error.c src/hook.c src/inicialize.c \
+SRCS =			src/draw.c src/error.c src/hook.c src/inicialize.c \
 				src/main.c src/mouse.c src/projection.c src/read_file.c src/util.c
 
 OBJS = 			$(SRCS:.c=.o)

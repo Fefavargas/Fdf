@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 00:10:19 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 01:47:24 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	inic_map_xy_array(t_fdf *fdf)
 	int		y;
 	char	*str;
 
-	if (!open_file(fdf))
-		error("open file error");
+	open_file(fdf);
 	y = 0;
 	str = get_next_line(fdf->fd);
 	fdf->map->x = count_words(str);
@@ -67,6 +66,15 @@ void	inic_map_xy_array(t_fdf *fdf)
 	init_array(fdf);
 }
 
+void	inic_map(t_fdf *fdf, char *filename)
+{
+	fdf->map = (t_map *)ft_calloc(sizeof(t_map), 1);
+	if (!fdf->map)
+		error("malloc map");
+	fdf->map->array = NULL;
+	fdf->filename = filename;
+}
+
 void	init_camera(t_fdf *fdf)
 {
 	t_camera	*camera;
@@ -85,3 +93,29 @@ void	init_camera(t_fdf *fdf)
 	fdf->camera = camera;
 }
 
+void	inicialize(t_fdf *fdf)
+{
+	fdf = NULL;
+	fdf = (t_fdf *)ft_calloc(1, sizeof(t_fdf));
+	if (!fdf)
+		error("malloc fdf");
+	fdf->mlx = mlx_init();
+	if (!fdf->mlx)
+		error("connecting graphic error");
+	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "FDF - fefa");
+	if (!fdf->win)
+		error("window initializing error");
+	fdf->img = (t_image *)ft_calloc(1, sizeof(t_image));
+	if (!fdf->img)
+		error("malloc image");
+	fdf->img->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	if (!fdf->img->img)
+		error("image initializing error");
+	fdf->img->data_addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, 
+			&fdf->img->size_len, &fdf->img->endian);
+	fdf->map = NULL;
+	fdf->camera = NULL;
+	fdf->mouse = (t_mouse *)ft_calloc(sizeof(t_mouse), 1);
+	if (!fdf->mouse)
+		error("mouse initializing error");
+}

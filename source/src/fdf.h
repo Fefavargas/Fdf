@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 01:18:01 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 01:42:10 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,16 @@ typedef struct s_fdf
 }	t_fdf;
 
 //read_file.c
-int		open_file(t_fdf *fdf);
-int		get_color(char *str);
-void	ft_z_min_max(t_fdf *fdf);
-//checker.c
-int		check_file(char *array);
-//int		check_x_y(t_fdf *fdf);
-int		check_nbr(char *str);
+void	read_file(t_fdf *fdf);
 //error.c
+void	open_file(t_fdf *fdf);
 void	free_fd(t_fdf *fdf);
 void	error(char *msg);
 //inicialize.c
 void	inic_map_xy_array(t_fdf *fdf);
 void	init_camera(t_fdf *fdf);
+void	inicialize(t_fdf *fdf);
+void	inic_map(t_fdf *fdf, char *filename);
 //util.c
 int		is_empty(char c);
 int		count_words(char *s);
