@@ -8,7 +8,6 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "*.c",
-                "../get_next_line/*.c",
                 "../libft/*.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
