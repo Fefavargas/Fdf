@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:12:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 01:41:33 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 18:57:53 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	put_pixel(int x, int y, int color, t_fdf *fdf)
 
 	if (x >= 0 && x <= WIDTH && y >= 0 && y < HEIGHT)
 	{
-		i = (x * fdf->img->bpp / 8) + (y * fdf->img->size_len);
-		fdf->img->data_addr[i] = color;
-		fdf->img->data_addr[++i] = color >> 8;
-		fdf->img->data_addr[++i] = color >> 16;
+		i = (x * fdf->img->bpp / 8) + (y * fdf->img->size_line);
+		fdf->img->data[i] = color;
+		fdf->img->data[++i] = color >> 8;
+		fdf->img->data[++i] = color >> 16;
 	}
 }
 
@@ -112,13 +112,14 @@ void	ft_draw(t_fdf *fdf)
 	int	x;
 	int	y;
 
-	ft_bzero(fdf->img->data_addr, HEIGHT * WIDTH * fdf->img->bpp / 8);
+	ft_putstr_fd("501-you are here\n", 1);
+	ft_bzero(fdf->img->data, HEIGHT * WIDTH * fdf->img->bpp / 8);
 	x = 0;
-	ft_putstr_fd("4012-you are here\n", 1);
+	ft_putstr_fd("502-you are here\n", 1);
 	while (x < fdf->map->x - 1 && x >= 0)
 	{
 		y = 0;
-		ft_putstr_fd("4013-you are here\n", 1);
+		ft_putstr_fd("503-you are here\n", 1);
 		while (y < fdf->map->y - 1 && y >= 0)
 		{
 			draw_line(fdf, project(x, y, fdf), project(x + 1, y, fdf));
@@ -127,5 +128,5 @@ void	ft_draw(t_fdf *fdf)
 		}
 		x += -2 * (fdf->camera->y_angle > 0) + 1;
 	}
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img->img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }

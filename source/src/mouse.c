@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 13:17:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 00:53:37 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 18:58:24 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_close_win(void *params)
 	int		y;
 
 	fdf = (t_fdf *)params;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
+	mlx_destroy_image(fdf->mlx, fdf->img);
 	mlx_destroy_window(fdf->mlx, fdf->win);
 	free(fdf->camera);
 	free(fdf->mouse);

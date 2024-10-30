@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 01:42:10 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:35:21 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_fdf
 	t_map		*map;
 	void		*mlx;
 	void		*win;
-	t_image		*img;
+	t_img		*img;
 	t_camera	*camera;
 	t_mouse		*mouse;
 }	t_fdf;

@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 01:47:24 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/30 18:58:10 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,14 @@ void	inicialize(t_fdf *fdf)
 	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "FDF - fefa");
 	if (!fdf->win)
 		error("window initializing error");
-	fdf->img = (t_image *)ft_calloc(1, sizeof(t_image));
+	fdf->img = (t_img *)ft_calloc(1, sizeof(t_img));
 	if (!fdf->img)
 		error("malloc image");
-	fdf->img->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
-	if (!fdf->img->img)
+	fdf->img->image = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	if (!fdf->img->image)
 		error("image initializing error");
-	fdf->img->data_addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, 
-			&fdf->img->size_len, &fdf->img->endian);
+	fdf->img->data = mlx_get_data_addr(fdf->img->image, &fdf->img->bpp, 
+			&fdf->img->size_line, &fdf->img->format);
 	fdf->map = NULL;
 	fdf->camera = NULL;
 	fdf->mouse = (t_mouse *)ft_calloc(sizeof(t_mouse), 1);
