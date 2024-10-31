@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:32:38 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/31 15:53:05 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 17:12:32 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,9 @@ int	get_default_color(int z, t_map *map)
 }
 
 
-static int	ft_lerp(int first, int second, double p)
+int	ft_lerp(int first, int second, double p)
 {
 	if (first == second)
 		return (first);
 	return ((int)((double)first + (second - first) * p));
-}
-
-int	get_color_rgb(int x, t_point ini, t_point fin, float factor)
-{
-	int		r;
-	int		g;
-	int		b;
-	float	percent;
-
-	percent = ft_abs(x - ini.x) / ft_abs(fin.x - ini.x);
-	// if (ini)
-	// {
-	r = ft_lerp((fin.color >> 16) & 0xFF, (ini.color >> 16) & 0xFF, percent);
-	g = ft_lerp((fin.color >> 8) & 0xFF, (ini.color >> 8) & 0xFF, percent);
-	b = ft_lerp(fin.color & 0xFF, ini.color & 0xFF, percent);
-	// else
-	// {
-	// 	r = ft_lerp((s.color >> 16) & 0xFF, (e.color >> 16) & 0xFF, percent);
-	// 	g = ft_lerp((s.color >> 8) & 0xFF, (e.color >> 8) & 0xFF, percent);
-	// 	b = ft_lerp(s.color & 0xFF, e.color & 0xFF, percent);
-	// }
-	r *= factor;
-	g *= factor;
-	b *= factor;
-	return ((r << 16) | (g << 8) | b);
 }

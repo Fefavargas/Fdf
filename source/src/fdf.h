@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/31 15:52:20 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 19:12:46 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <fcntl.h> // open, close, read, write
 # include <stdlib.h> //free
 # include <limits.h> //INT_MIN INT_MAX
-# include "../minilibx-linux/mlx.h" //MiniLibX
-# include "../minilibx-linux/mlx_int.h" //MiniLibX
+# include "mlx.h" //MiniLibX
 # include <math.h> //sin, cos
 # include "setting.h"
 
@@ -55,6 +54,16 @@ typedef struct s_camera
 	int		iso;
 }	t_camera;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*data;
+	int		size_line;
+	int		bpp;
+	int		format;
+}	t_img;
+
+
 typedef struct s_map
 {
 	int	x;
@@ -79,7 +88,8 @@ typedef struct s_fdf
 //read_file.c
 void	read_file(t_fdf *fdf);
 //color.c
-int		get_color_rgb(int x, t_point ini, t_point fin, float factor);
+int		ft_lerp(int first, int second, double p);
+float	ft_rfpart(float n);
 int		get_color(char *str);
 //error.c
 void	open_file(t_fdf *fdf);

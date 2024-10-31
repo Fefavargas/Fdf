@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 13:09:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/31 13:54:28 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 19:17:42 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	ft_translate(int keycode, t_fdf *fdf)
 {
+	ft_putstr_fd("2-you are here\n", 1);
 	if (keycode == ARROW_LEFT)
 		fdf->camera->x_offset -= 10;
 	else if (keycode == ARROW_RIGHT)
@@ -26,6 +27,7 @@ static void	ft_translate(int keycode, t_fdf *fdf)
 
 static void	ft_mod_height(int keycode, t_fdf *env)
 {
+	ft_putstr_fd("3-you are here\n", 1);
 	if (keycode == MINUS)
 		env->camera->z_height += 0.1;
 	else if (keycode == PLUS)
@@ -38,6 +40,7 @@ static void	ft_mod_height(int keycode, t_fdf *env)
 
 static void	ft_reset(t_fdf *env)
 {
+	ft_putstr_fd("4-you are here\n", 1);
 	env->camera->x_offset = 0;
 	env->camera->y_offset = 0;
 	if (env->camera->iso)
@@ -83,4 +86,5 @@ void	hook_control(t_fdf *fdf)
 	mlx_hook(fdf->win, 4, 0, ft_mouse, fdf);
 	mlx_hook(fdf->win, 6, 0, ft_mouse_move, fdf);
 	mlx_hook(fdf->win, 17, 0, ft_close_win, fdf);
+	ft_putstr_fd("1-hook control\n", 1);
 }

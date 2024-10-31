@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/31 13:50:12 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 19:13:59 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ t_fdf	*inicialize(void)
 	fdf->img = (t_img *)ft_calloc(1, sizeof(t_img));
 	if (!fdf->img)
 		error("malloc image");
-	fdf->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	fdf->img->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
 	if (!fdf->img)
 		error("image initializing error");
-	fdf->img->data = mlx_get_data_addr(fdf->img, &fdf->img->bpp, 
+	fdf->img->data = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, 
 			&fdf->img->size_line, &fdf->img->format);
 	fdf->map = NULL;
 	fdf->camera = NULL;
