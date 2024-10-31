@@ -6,32 +6,11 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 14:49:51 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 15:33:11 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	get_color(char *str)
-{
-	int	color;
-	int	i;
-
-	if (!ft_strncmp(str, "0x", 2) || !ft_strncmp(str, "0X", 2))
-	{
-		i = 2;
-		color = 0;
-		while (str[i])
-		{
-			color *= 16;
-			color += get_digit(str[i], 16);
-			i++;
-		}
-		if (color >= 0 && color <= 16777215)
-			return (color);
-	}
-	return (-1);
-}
 
 void	get_value(char *str, int y, t_fdf *fdf)
 {

@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:06:52 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 01:41:55 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 15:52:13 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,6 @@ int	count_words(char *s)
 	return (count);
 }
 
-int	get_digit(char c, int digit_base)
-{
-	int	max_digit;
-
-	if (digit_base <= 10)
-		max_digit = digit_base + '0';
-	else
-		max_digit = digit_base - 11 + 'a';
-	if (c >= '0' && c <= '9' && c <= max_digit)
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f' && c <= max_digit)
-		return (10 + c - 'a');
-	else
-		return (-1);
-}
-
 int	ft_abs(int a)
 {
 	if (a < 0)
@@ -66,4 +50,13 @@ int	ft_min(int a, int b)
 	if (a < b)
 		return (a);
 	return (b);
+}
+
+void	ft_swap(int *x, int *y)
+{
+	int	tmp;
+
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 13:09:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 18:26:35 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:54:28 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,8 @@ int	ft_key_press(int keycode, void *params)
 
 void	hook_control(t_fdf *fdf)
 {
-	ft_putstr_fd("401-you are here\n", 1);
-	//mlx_hook(fdf->win, 2, 0, ft_key_press, fdf);
-	ft_putstr_fd(fdf->filename, 1);
-	ft_putstr_fd("402-you are here\n", 1);	
-	// mlx_hook(fdf->win, 4, 0, ft_mouse, fdf);
-	// ft_putstr_fd("403-you are here\n", 1);
-	// mlx_hook(fdf->win, 6, 0, ft_mouse_move, fdf);
-	// ft_putstr_fd("404-you are here\n", 1);
-	// mlx_hook(fdf->win, 17, 0, ft_close_win, fdf);
+	mlx_hook(fdf->win, 2, 0, ft_key_press, fdf);
+	mlx_hook(fdf->win, 4, 0, ft_mouse, fdf);
+	mlx_hook(fdf->win, 6, 0, ft_mouse_move, fdf);
+	mlx_hook(fdf->win, 17, 0, ft_close_win, fdf);
 }

@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 19:35:21 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 15:52:20 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,6 @@ typedef struct s_camera
 	int		iso;
 }	t_camera;
 
-typedef struct s_image
-{
-	void	*img;
-	char	*data_addr;
-	int		bpp;
-	int		size_len;
-	int		endian;
-}	t_image;
-
 typedef struct s_map
 {
 	int	x;
@@ -87,6 +78,9 @@ typedef struct s_fdf
 
 //read_file.c
 void	read_file(t_fdf *fdf);
+//color.c
+int		get_color_rgb(int x, t_point ini, t_point fin, float factor);
+int		get_color(char *str);
 //error.c
 void	open_file(t_fdf *fdf);
 void	free_fd(t_fdf *fdf);
@@ -94,12 +88,12 @@ void	error(char *msg);
 //inicialize.c
 void	inic_map_xy_array(t_fdf *fdf);
 void	init_camera(t_fdf *fdf);
-void	inicialize(t_fdf *fdf);
+t_fdf	*inicialize(void);
 void	inic_map(t_fdf *fdf, char *filename);
 //util.c
 int		is_empty(char c);
+void	ft_swap(int *x, int *y);
 int		count_words(char *s);
-int		get_digit(char c, int digit_base);
 int		ft_abs(int a);
 int		ft_min(int a, int b);
 //projection.c

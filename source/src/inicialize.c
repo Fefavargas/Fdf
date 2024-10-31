@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 18:58:10 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:50:12 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ void	init_camera(t_fdf *fdf)
 	fdf->camera = camera;
 }
 
-void	inicialize(t_fdf *fdf)
+t_fdf	*inicialize(void)
 {
-	fdf = NULL;
-	fdf = (t_fdf *)ft_calloc(1, sizeof(t_fdf));
+	t_fdf	*fdf;
+
+	fdf = ft_calloc(1, sizeof(t_fdf));
 	if (!fdf)
 		error("malloc fdf");
 	fdf->mlx = mlx_init();
@@ -108,14 +109,15 @@ void	inicialize(t_fdf *fdf)
 	fdf->img = (t_img *)ft_calloc(1, sizeof(t_img));
 	if (!fdf->img)
 		error("malloc image");
-	fdf->img->image = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
-	if (!fdf->img->image)
+	fdf->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	if (!fdf->img)
 		error("image initializing error");
-	fdf->img->data = mlx_get_data_addr(fdf->img->image, &fdf->img->bpp, 
+	fdf->img->data = mlx_get_data_addr(fdf->img, &fdf->img->bpp, 
 			&fdf->img->size_line, &fdf->img->format);
 	fdf->map = NULL;
 	fdf->camera = NULL;
 	fdf->mouse = (t_mouse *)ft_calloc(sizeof(t_mouse), 1);
 	if (!fdf->mouse)
 		error("mouse initializing error");
+	return (fdf);
 }

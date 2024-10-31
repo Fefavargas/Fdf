@@ -6,7 +6,7 @@
 #    By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 20:36:48 by fvargas           #+#    #+#              #
-#    Updated: 2024/10/30 01:48:30 by fvargas          ###   ########.fr        #
+#    Updated: 2024/10/31 15:33:30 by fvargas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ LIBFT =			libft/libft.a
 MLX =			minilibx-linux/libmlx.a
 HDRS =			src/fdf.h src/setting.h
 SRCS =			src/draw.c src/error.c src/hook.c src/inicialize.c \
-				src/main.c src/mouse.c src/projection.c src/read_file.c src/util.c
+				src/main.c src/mouse.c src/projection.c src/read_file.c src/util.c \
+				src/color.c
 
 OBJS = 			$(SRCS:.c=.o)
 
