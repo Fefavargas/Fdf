@@ -3,35 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   setting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:00:25 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/30 01:45:51 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:51:20 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTING_H
 # define SETTING_H
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WINDOW_W		1440
+# define WINDOW_H		900
 # define WINDOW_TITLE "FDF by Fefa"
 
-# define ARROW_LEFT 123
-# define ARROW_RIGHT 124
-# define ARROW_DOWN 125
-# define ARROW_UP 126
+# define WIRE_COLOR     0x87CEEB
+# define BLACK			0x000000
 
-# define MINUS 27
-# define PLUS 24
-# define SPACE 49
-# define KEY_R 15
+# define SCREEN_UTIL	0.9
+# define Z_S			0.08
 
-# define MOUSE_CLICK_LEFT 1
-# define MOUSE_CLICK_RIGHT 2
-# define MOUSE_CLICK_MIDDLE 3
-# define MOUSE_WHEEL_UP 4
-# define MOUSE_WHEEL_DOWN 5
-# define ESCAPE 53
+#define XK_Left         0xff51  /* Move left, left arrow */
+#define XK_Up           0xff52  /* Move up, up arrow */
+#define XK_Right        0xff53  /* Move right, right arrow */
+#define XK_Down         0xff54  /* Move down, down arrow */
+#define XK_Escape       0xff1b  /* ESC */
+#define DestroyNotify		17
 
 #endif

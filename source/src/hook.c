@@ -3,88 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 13:09:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/31 19:17:42 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:50:06 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	ft_translate(int keycode, t_fdf *fdf)
+
+int	handle_x(t_fdf	*fdf)
 {
-	ft_putstr_fd("2-you are here\n", 1);
-	if (keycode == ARROW_LEFT)
-		fdf->camera->x_offset -= 10;
-	else if (keycode == ARROW_RIGHT)
-		fdf->camera->x_offset += 10;
-	else if (keycode == ARROW_DOWN)
-		fdf->camera->y_offset += 10;
-	else if (keycode == ARROW_UP)
-		fdf->camera->y_offset -= 10;
+	free_fdf(fdf);
+	exit(EXIT_SUCCESS);
+	return (0);
 }
 
-static void	ft_mod_height(int keycode, t_fdf *env)
+void	key_left_right(int keycode, t_fdf *fdf)
 {
-	ft_putstr_fd("3-you are here\n", 1);
-	if (keycode == MINUS)
-		env->camera->z_height += 0.1;
-	else if (keycode == PLUS)
-		env->camera->z_height -= 0.1;
-	if (env->camera->z_height < 0.1)
-		env->camera->z_height = 0.1;
-	else if (env->camera->z_height > 10)
-		env->camera->z_height = 10;
-}
-
-static void	ft_reset(t_fdf *env)
-{
-	ft_putstr_fd("4-you are here\n", 1);
-	env->camera->x_offset = 0;
-	env->camera->y_offset = 0;
-	if (env->camera->iso)
+	if (keycode == XK_Left)
 	{
-		env->camera->x_angle = -0.615472907;
-		env->camera->y_angle = -0.523599;
-		env->camera->z_angle = 0.615472907;
+		fdf->camera.angle += 10;
+		if (fdf->camera.angle >= 360)
+			fdf->camera.angle = 0;
 	}
-	else
+	if (keycode == XK_Right)
 	{
-		env->camera->x_angle = -0.523599;
-		env->camera->y_angle = -0.261799;
-		env->camera->z_angle = 0;
+		fdf->camera.angle -= 10;
+		if (fdf->camera.angle <= 0)
+			fdf->camera.angle = 360;
 	}
-	env->camera->z_height = 1;
-	env->camera->zoom = ft_min(WIDTH / env->map->x / 2,
-			HEIGHT / env->map->y / 2);
 }
 
-int	ft_key_press(int keycode, void *params)
+void	key_up_down(int keycode, t_fdf *fdf)
 {
-	t_fdf	*fdf;
+	if (keycode == XK_Up)
+		fdf->camera.z_scale += 0.02;
+	if (keycode == XK_Down)
+		fdf->camera.z_scale -= 0.02;
+}
 
-	fdf = (t_fdf *)params;
-	ft_putstr_fd("4010-you are here\n", 1);
-	if (keycode == ARROW_DOWN || keycode == ARROW_LEFT || keycode == ARROW_UP
-		|| keycode == ARROW_RIGHT)
-		ft_translate(keycode, fdf);
-	else if (keycode == MINUS || keycode == PLUS)
-		ft_mod_height(keycode, fdf);
-	else if (keycode == KEY_R)
-		ft_reset(fdf);
-	else if (keycode == ESCAPE)
-		ft_close_win(fdf);
-	ft_putstr_fd("4011-you are here\n", 1);
+int	handle_keypress(int keycode, t_fdf *fdf)
+{
+	if (keycode == XK_Escape)
+		handle_x(fdf);
+	if (keycode == XK_Left ||keycode == XK_Right)
+		key_left_right(keycode, fdf);
+	if (keycode == XK_Up || keycode == XK_Down)
+		key_up_down(keycode, fdf);
 	ft_draw(fdf);
 	return (0);
 }
 
 void	hook_control(t_fdf *fdf)
 {
-	mlx_hook(fdf->win, 2, 0, ft_key_press, fdf);
-	mlx_hook(fdf->win, 4, 0, ft_mouse, fdf);
-	mlx_hook(fdf->win, 6, 0, ft_mouse_move, fdf);
-	mlx_hook(fdf->win, 17, 0, ft_close_win, fdf);
-	ft_putstr_fd("1-hook control\n", 1);
+	mlx_key_hook(fdf->win, &handle_keypress, fdf);
+	mlx_hook(fdf->win, DestroyNotify, 0, &handle_x, fdf);
 }

@@ -3,76 +3,140 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 01:10:43 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:53:51 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_rotate_x(int *y, int *z, double x_angle)
+static void	get_extrema(t_fdf *fdf, int angle)
 {
-	int	prev_y;
+	int		x;
+	int		y;
+	float	x_proj;
+	float	y_proj;
 
-	prev_y = *y;
-	*y = prev_y * cos(x_angle) + *z * sin(x_angle);
-	*z = prev_y * (-sin(x_angle)) + *z * cos(x_angle);
+	y = -1;
+	while (++y < fdf->map.y_max)
+	{
+		x = -1;
+		while (++x < fdf->map.x_max)
+		{
+			x_proj = (x - y) * cos(angle * M_PI / 180);
+			y_proj = (x + y) * sin(angle * M_PI / 180) - fdf->map.array[y][x][0] * fdf->camera.z_scale;
+			fdf->proj.x_proj_max = ft_bigger_float(x_proj, fdf->proj.x_proj_max);
+			if (x_proj < fdf->proj.x_proj_min)
+				fdf->proj.x_proj_min = x_proj;
+			fdf->proj.y_proj_max = ft_bigger_float(y_proj, fdf->proj.y_proj_max);
+			if (y_proj < fdf->proj.y_proj_min)
+				fdf->proj.y_proj_min = y_proj;
+		}
+	}
 }
 
-void	ft_rotate_y(int *x, int *z, double y_angle)
+static void	get_scale(t_fdf *fdf, int angle)
 {
-	int	prev_x;
+	float	x_range;
+	float	y_range;
+	float	x_scale;
+	float	y_scale;
+	float	scale;
 
-	prev_x = *x;
-	*x = prev_x * cos(y_angle) + *z * sin(y_angle);
-	*z = prev_x * sin(y_angle) + *z * cos(y_angle);
+	get_extrema(fdf, angle);
+	x_range = fdf->proj.x_proj_max - fdf->proj.x_proj_min;
+	y_range = fdf->proj.y_proj_max - fdf->proj.y_proj_min;
+	x_scale = WINDOW_W / x_range * SCREEN_UTIL;
+	y_scale = WINDOW_H / y_range * SCREEN_UTIL;
+	scale = y_scale;
+	if (x_scale < y_scale)
+		scale = x_scale;
+	fdf->camera.scale = scale;
 }
 
-void	ft_rotate_z(int *x, int *y, double z_angle)
+static void	get_offset(t_fdf *fdf)
 {
-	int	prev_x;
-	int	prev_y;
+	float	x_range;
+	float	y_range;
+	float	x_offset;
+	float	y_offset;
 
-	prev_x = *x;
-	prev_y = *y;
-	*x = prev_x * cos(z_angle) - prev_y * sin(z_angle);
-	*y = prev_x * sin(z_angle) + prev_y * cos(z_angle);
+	x_range = fdf->proj.x_proj_max - fdf->proj.x_proj_min;
+	y_range = fdf->proj.y_proj_max - fdf->proj.y_proj_min;
+	x_offset = (WINDOW_W - (x_range * fdf->camera.scale)) / 2;
+	fdf->camera.x_offset = x_offset;
+	y_offset = (WINDOW_H - (y_range * fdf->camera.scale)) / 2;
+	fdf->camera.y_offset = y_offset;
 }
 
-void	iso(int *x, int *y, int z)
+void	project(t_fdf *fdf, int angle)
 {
-	int	prev_x;
-	int	prev_y;
+	int		x;
+	int		y;
+	float	x_proj;
+	float	y_proj;
+	float	z_proj;
 
-	prev_x = *x;
-	prev_y = *y;
-	*x = (prev_x - prev_y) * cos(0.523599);
-	*y = (prev_x + prev_y) * sin(0.523599) - z;
+	y = -1;
+	black_background(fdf);
+	inic_proj_min_max(fdf);
+	get_scale(fdf, angle);
+	get_offset(fdf);
+	while (++y < fdf->map.y_max)
+	{
+		x = -1;
+		while (++x < fdf ->map.x_max)
+		{
+			z_proj = fdf->map.array[y][x][0];
+			x_proj = (((x - y) * cos(angle * M_PI / 180)) - fdf->proj.x_proj_min) * fdf->camera.scale + fdf->camera.x_offset;
+			y_proj = (((x + y) * sin(angle * M_PI / 180) - z_proj * fdf->camera.z_scale)
+							- fdf->proj.y_proj_min) * fdf->camera.scale + fdf->camera.y_offset;
+			fdf->proj.x_proj[y][x] = x_proj;
+			fdf->proj.y_proj[y][x] = y_proj;
+		}
+	}
 }
 
-t_point	project(int x, int y, t_fdf *fdf)
-{
-	t_point	point;
+// void	ft_rotate_x(int *y, int *z, double x_angle)
+// {
+// 	int	prev_y;
 
-	if (fdf->map->array[x][y][1] >= 0)
-		point.color = fdf->map->array[x][y][1];
-	else
-		point.color = get_default_color(fdf->map->array[y][x][0], fdf->map);
-	point.z = fdf->map->array[x][y][0];
-	point.z *= fdf->camera->zoom / fdf->camera->z_height;
-	point.x = x * fdf->camera->zoom;
-	point.y = y * fdf->camera->zoom;
-	point.x -= (fdf->map->x * fdf->camera->zoom) / 2;
-	point.y -= (fdf->map->y * fdf->camera->zoom) / 2;
-	ft_rotate_x(&point.y, &point.z, fdf->camera->x_angle);
-	ft_rotate_y(&point.x, &point.z, fdf->camera->y_angle);
-	ft_rotate_z(&point.x, &point.y, fdf->camera->z_angle);
-	if (fdf->camera->iso)
-		iso(&point.x, &point.y, point.z);
-	point.x += WIDTH / 2 + fdf->camera->x_offset;
-	point.y += (HEIGHT + fdf->map->y / 2 * fdf->camera->zoom) / 2;
-	point.y += fdf->camera->y_offset;
-	return (point);
-}
+// 	prev_y = *y;
+// 	*y = prev_y * cos(x_angle) + *z * sin(x_angle);
+// 	*z = prev_y * (-sin(x_angle)) + *z * cos(x_angle);
+// }
+
+// void	ft_rotate_y(int *x, int *z, double y_angle)
+// {
+// 	int	prev_x;
+
+// 	prev_x = *x;
+// 	*x = prev_x * cos(y_angle) + *z * sin(y_angle);
+// 	*z = prev_x * sin(y_angle) + *z * cos(y_angle);
+// }
+
+// void	ft_rotate_z(int *x, int *y, double z_angle)
+// {
+// 	int	prev_x;
+// 	int	prev_y;
+
+// 	prev_x = *x;
+// 	prev_y = *y;
+// 	*x = prev_x * cos(z_angle) - prev_y * sin(z_angle);
+// 	*y = prev_x * sin(z_angle) + prev_y * cos(z_angle);
+// }
+
+// void	iso(float *x, float *y, int z)
+// {
+// 	float	prev_x;
+// 	float	prev_y;
+
+// 	printf("->> x =%f,  y =%f,  z =%i -<<", *x, *y, z);
+// 	prev_x = *x;
+// 	prev_y = *y;
+// 	*x = (prev_x - prev_y) * cos(0.523599);
+// 	*y = (prev_x + prev_y) * sin(0.523599) - z;
+// 	printf(" point x =%f,  point y =%f,  point z =%d", *x, *y, z);
+// }

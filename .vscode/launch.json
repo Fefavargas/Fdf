@@ -6,7 +6,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/fdf",
-      //"args": [" 1 3 2"],
+      "args": ["../maps/test_maps/42.fdf"],
       "cwd": "{workspaceFolder}"
     }
   ]

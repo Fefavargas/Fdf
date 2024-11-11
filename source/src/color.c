@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:32:38 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/31 17:12:32 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:40:39 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,77 @@ int	get_digit(char c, int digit_base)
 		return (-1);
 }
 
-int	get_color(char *str)
+int	get_color_code(char *str, char **token_arr, t_fdf *fdf)
 {
 	int	color;
 	int	i;
 
 	if (!ft_strncmp(str, "0x", 2) || !ft_strncmp(str, "0X", 2))
 	{
-		i = 2;
+		i = 1;
 		color = 0;
-		while (str[i])
+		while (str[++i])
 		{
 			color *= 16;
-			color += get_digit(str[i], 16);
-			i++;
+			color += get_digit(ft_tolower(str[i]), 16);
 		}
 		if (color >= 0 && color <= 16777215)
 			return (color);
 	}
+	free_str_arr(token_arr);
+	msg_and_exit("Invalid color code.\n", fdf);
 	return (-1);
 }
 
-int	get_default_color(int z, t_map *map)
+void	black_background(t_fdf *fdf)
 {
-	double			percent;
-	unsigned int	max;
+	int	i;
+	int	j;
 
-	max = map->z_max - map->z_min;
-	if (max == 0)
-		return (0x432371);
-	percent = ((double)(z - map->z_min) / max);
-	if (percent < 0.2)
-		return (0x432371);
-	else if (percent < 0.4)
-		return (0x714674);
-	else if (percent < 0.6)
-		return (0x9F6976);
-	else if (percent < 0.8)
-		return (0xCC8B79);
-	else
-		return (0xFAAE7B);
+	i = -1;
+	while (++i < WINDOW_H)
+	{
+		j = -1;
+		while (++j < WINDOW_W)
+			img_pix_put(&fdf->img, j, i, BLACK);
+	}
 }
 
+// int	get_default_color(int z, t_map map)
+// {
+// 	double			percent;
+// 	unsigned int	max;
 
-int	ft_lerp(int first, int second, double p)
-{
-	if (first == second)
-		return (first);
-	return ((int)((double)first + (second - first) * p));
-}
+// 	max = map.z_max - map.z_min;
+// 	if (max == 0)
+// 		return (WIRE_COLOR);
+// 	percent = ((double)(z - map.z_min) / max);
+// 	if (percent < 0.2)
+// 		return (WHITE);
+// 	else if (percent < 0.4)
+// 		return (YELLOW);
+// 	else if (percent < 0.6)
+// 		return (GREEN);
+// 	else if (percent < 0.8)
+// 		return (RED);
+// 	else
+// 		return (BLUE);
+// }
+
+// void	ft_adjust_color(t_fdf *fdf)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = -1;
+// 	while (++i < fdf->map.y_max)
+// 	{
+// 		j = -1;
+// 		while (++j < fdf->map.x_max)
+// 		{
+// 			if (fdf->map.array[j][i][1] == WIRE_COLOR)
+// 				fdf->map.array[j][i][1] = 
+//get_default_color(fdf->map.array[j][i][0], fdf->map);
+// 		}
+// 	}
+// }

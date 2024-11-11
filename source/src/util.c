@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:06:52 by fvargas           #+#    #+#             */
-/*   Updated: 2024/10/31 15:52:13 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:55:23 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_empty(char c)
 {
-	if (c == ' ' || c == '\n' || c == ',')
+	if (c == ' ' || c == '\n')
 		return (1);
 	return (0);
 }
@@ -38,25 +38,32 @@ int	count_words(char *s)
 	return (count);
 }
 
-int	ft_abs(int a)
+int	ft_bigger(int x, int y)
 {
-	if (a < 0)
-		return (-a);
-	return (a);
+	if (x > y)
+		return (x);
+	return (y);
 }
 
-int	ft_min(int a, int b)
+int	ft_smaller(int x, int y)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	if (x < y)
+		return (x);
+	return (y);
 }
 
-void	ft_swap(int *x, int *y)
+float	ft_bigger_float(float x, float y)
 {
-	int	tmp;
+	if (x > y)
+		return (x);
+	return (y);
+}
 
-	tmp = *x;
-	*x = *y;
-	*y = tmp;
+t_point	create_point(int x, int y)
+{
+	t_point p;
+
+	p.x = x;
+	p.y = y;
+	return (p);
 }

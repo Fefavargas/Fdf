@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+         #
+#    By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 20:36:48 by fvargas           #+#    #+#              #
-#    Updated: 2024/10/31 18:33:29 by fvargas          ###   ########.fr        #
+#    Updated: 2024/11/11 13:57:17 by fefa             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX =			mlx/libmlx.a
 HDRS =			src/fdf.h src/setting.h
 SRCS =			src/draw.c src/error.c src/hook.c src/inicialize.c \
 				src/main.c src/mouse.c src/projection.c src/read_file.c src/util.c \
-				src/color.c
+				src/color.c src/free.c
 
 OBJS = 			$(SRCS:.c=.o)
 
