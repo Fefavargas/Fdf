@@ -6,7 +6,7 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:00:25 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/11 13:51:20 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 09:45:36 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # define SCREEN_UTIL	0.9
 # define Z_S			0.08
 
-#define XK_Left         0xff51  /* Move left, left arrow */
-#define XK_Up           0xff52  /* Move up, up arrow */
-#define XK_Right        0xff53  /* Move right, right arrow */
-#define XK_Down         0xff54  /* Move down, down arrow */
-#define XK_Escape       0xff1b  /* ESC */
-#define DestroyNotify		17
+# define XK_LEFT			0xff51
+# define XK_UP			0xff52
+# define XK_RIGHT		0xff53
+# define XK_DOWN			0xff54
+# define XK_ESCAPE		0xff1b
+# define DESTROY_NOTIFY	17
 
 #endif

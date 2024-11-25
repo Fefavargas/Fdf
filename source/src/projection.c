@@ -6,11 +6,20 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/11 13:53:51 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 10:58:30 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+t_point	create_point(int x, int y)
+{
+	t_point	p;
+
+	p.x = x;
+	p.y = y;
+	return (p);
+}
 
 static void	get_extrema(t_fdf *fdf, int angle)
 {
@@ -18,6 +27,7 @@ static void	get_extrema(t_fdf *fdf, int angle)
 	int		y;
 	float	x_proj;
 	float	y_proj;
+	float	tmp;
 
 	y = -1;
 	while (++y < fdf->map.y_max)
@@ -26,11 +36,14 @@ static void	get_extrema(t_fdf *fdf, int angle)
 		while (++x < fdf->map.x_max)
 		{
 			x_proj = (x - y) * cos(angle * M_PI / 180);
-			y_proj = (x + y) * sin(angle * M_PI / 180) - fdf->map.array[y][x][0] * fdf->camera.z_scale;
-			fdf->proj.x_proj_max = ft_bigger_float(x_proj, fdf->proj.x_proj_max);
+			y_proj = (x + y) * sin(angle * M_PI / 180);
+			y_proj -= fdf->map.array[y][x][0] * fdf->camera.z_scale;
+			tmp = ft_bigger_float(x_proj, fdf->proj.x_proj_max);
+			fdf->proj.x_proj_max = tmp;
 			if (x_proj < fdf->proj.x_proj_min)
 				fdf->proj.x_proj_min = x_proj;
-			fdf->proj.y_proj_max = ft_bigger_float(y_proj, fdf->proj.y_proj_max);
+			tmp = ft_bigger_float(y_proj, fdf->proj.y_proj_max);
+			fdf->proj.y_proj_max = tmp;
 			if (y_proj < fdf->proj.y_proj_min)
 				fdf->proj.y_proj_min = y_proj;
 		}
@@ -77,7 +90,6 @@ void	project(t_fdf *fdf, int angle)
 	int		y;
 	float	x_proj;
 	float	y_proj;
-	float	z_proj;
 
 	y = -1;
 	black_background(fdf);
@@ -89,10 +101,11 @@ void	project(t_fdf *fdf, int angle)
 		x = -1;
 		while (++x < fdf ->map.x_max)
 		{
-			z_proj = fdf->map.array[y][x][0];
-			x_proj = (((x - y) * cos(angle * M_PI / 180)) - fdf->proj.x_proj_min) * fdf->camera.scale + fdf->camera.x_offset;
-			y_proj = (((x + y) * sin(angle * M_PI / 180) - z_proj * fdf->camera.z_scale)
-							- fdf->proj.y_proj_min) * fdf->camera.scale + fdf->camera.y_offset;
+			x_proj = ((x - y) * cos(angle * M_PI / 180)) - fdf->proj.x_proj_min;
+			x_proj = (x_proj * fdf->camera.scale) + fdf->camera.x_offset;
+			y_proj = (x + y) * sin(angle * M_PI / 180) - fdf->proj.y_proj_min;
+			y_proj -= fdf->map.array[y][x][0] * fdf->camera.z_scale;
+			y_proj = (y_proj * fdf->camera.scale) + fdf->camera.y_offset;
 			fdf->proj.x_proj[y][x] = x_proj;
 			fdf->proj.y_proj[y][x] = y_proj;
 		}

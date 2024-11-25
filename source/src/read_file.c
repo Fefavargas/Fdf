@@ -6,7 +6,7 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/11 13:55:02 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 06:29:22 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static	void	get_value(char *str, t_fdf *fdf, int y)
 	int		x;
 	char	**token_arr;
 	char	*color_str;
+	int		color;
 
 	x = -1;
 	token_arr = ft_split(str, ' ');
@@ -27,11 +28,12 @@ static	void	get_value(char *str, t_fdf *fdf, int y)
 	while (++x < fdf->map.x_max)
 	{
 		fdf->map.array[y][x][0] = ft_atoi(token_arr[x]);
-		//fdf->map.z_max = ft_bigger(fdf->map.z_max, fdf->map.array[y][x][0]);
-		//fdf->map.z_min = ft_smaller(fdf->map.z_min, fdf->map.array[y][x][0]);
 		color_str = ft_strchr(token_arr[x], ',');
 		if (color_str)
-			fdf->map.array[y][x][1] = get_color_code(color_str + 1, token_arr, fdf);
+		{
+			color = get_color_code(color_str + 1, token_arr, fdf);
+			fdf->map.array[y][x][1] = color;
+		}
 	}
 	free_str_arr(token_arr);
 }
@@ -52,7 +54,6 @@ void	get_values_map(t_fdf *fdf)
 		y++;
 	}
 	close_file(fdf);
-	//ft_adjust_color(fdf);
 }
 
 void	parse_map(t_fdf *fdf)

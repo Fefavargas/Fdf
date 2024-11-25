@@ -6,7 +6,7 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:06:52 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/11 13:55:23 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 06:31:52 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,4 @@ float	ft_bigger_float(float x, float y)
 	if (x > y)
 		return (x);
 	return (y);
-}
-
-t_point	create_point(int x, int y)
-{
-	t_point p;
-
-	p.x = x;
-	p.y = y;
-	return (p);
 }

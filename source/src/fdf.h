@@ -6,7 +6,7 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/11 14:03:37 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 07:26:14 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@
 # include <limits.h> //INT_MIN INT_MAX
 # include "../mlx/mlx.h" //MiniLibX
 # include <math.h> //sin, cos
+# include <stdio.h> //perror
 # include "setting.h"
-# include <stdio.h> //delete
-
-//lines -> height -> y
-// width -> x
 
 typedef struct s_point
 {
@@ -32,7 +29,7 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef struct s_bresenham
+typedef struct s_bresen
 {
 	int		x0;
 	int		y0;
@@ -42,7 +39,7 @@ typedef struct s_bresenham
 	int		dy;
 	int		sx;
 	int		sy;
-}	t_bresenham;
+}	t_bresen;
 
 // typedef struct s_mouse
 // {
@@ -104,13 +101,12 @@ typedef struct s_fdf
 	void		*win;
 	t_img		img;
 	t_camera	camera;
-	// t_mouse		mouse;
 }	t_fdf;
 
 //read_file.c
 void	parse_map(t_fdf *fdf);
 //color.c
-int	get_color_code(char *str, char **token_arr, t_fdf *fdf);
+int		get_color_code(char *str, char **token_arr, t_fdf *fdf);
 void	black_background(t_fdf *fdf);
 //error.c
 void	check_file(int argc, char **argv);

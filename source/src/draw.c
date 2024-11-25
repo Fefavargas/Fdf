@@ -6,13 +6,13 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:12:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/11 13:42:12 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 10:59:35 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	init_bresenham(t_bresenham *bresen, t_fdf *fdf, t_point s, t_point e)
+void	init_bresenham(t_bresen *bresen, t_fdf *fdf, t_point s, t_point e)
 {
 	bresen->x0 = (int)fdf->proj.x_proj[s.y][s.x];
 	bresen->y0 = (int)fdf->proj.y_proj[s.y][s.x];
@@ -36,15 +36,17 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-static void	draw_line(t_fdf *fdf, int row, int col, t_bresenham bresen)
+static void	draw_line(t_fdf *fdf, int row, int col, t_bresen bresen)
 {
-	int			err;
-	int			e2;
+	int	err;
+	int	e2;
+	int	color;	
 
 	err = bresen.dx - bresen.dy;
 	while (bresen.x0 != bresen.x1 || bresen.y0 != bresen.y1)
 	{
-		img_pix_put(&fdf->img, bresen.x0, bresen.y0, fdf->map.array[row][col][1]);
+		color = fdf->map.array[row][col][1];
+		img_pix_put(&fdf->img, bresen.x0, bresen.y0, color);
 		e2 = 2 * err;
 		if (e2 > -bresen.dy)
 		{
@@ -59,9 +61,15 @@ static void	draw_line(t_fdf *fdf, int row, int col, t_bresenham bresen)
 	}
 }
 
+void	bresen_and_draw_line(t_fdf *fdf, t_point s, t_point e, t_bresen *b)
+{
+	init_bresenham(b, fdf, s, e);
+	draw_line(fdf, s.y, s.x, *b);
+}
+
 void	ft_draw(t_fdf *fdf)
 {
-	t_bresenham	bresen;
+	t_bresen	bresen;
 	t_point		s;
 	t_point		e;
 
@@ -75,14 +83,12 @@ void	ft_draw(t_fdf *fdf)
 			if (s.x < (fdf->map.x_max - 1))
 			{
 				e = create_point(s.x + 1, s.y);
-				init_bresenham(&bresen, fdf, s, e);
-				draw_line(fdf, s.y, s.x, bresen);
+				bresen_and_draw_line(fdf, s, e, &bresen);
 			}
 			if (s.y < (fdf->map.y_max -1))
 			{
 				e = create_point(s.x, s.y + 1);
-				init_bresenham(&bresen, fdf, s, e);
-				draw_line(fdf, s.y, s.x, bresen);
+				bresen_and_draw_line(fdf, s, e, &bresen);
 			}
 		}
 	}

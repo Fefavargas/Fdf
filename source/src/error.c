@@ -6,12 +6,11 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:21:26 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/11 14:04:16 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 07:25:03 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 void	check_file(int argc, char **argv)
 {
@@ -23,7 +22,7 @@ void	check_file(int argc, char **argv)
 	while (len >= 0 && argv[1][len] != '.')
 		len--;
 	if (ft_strncmp(argv[1] + len, ".fdf", 4))
-		msg_and_exit("Use file with extension fdf", NULL);
+		msg_and_exit("Use file with extension fdf\n", NULL);
 }
 
 void	msg_and_exit(char *msg, t_fdf *fdf)
@@ -44,7 +43,7 @@ void	open_file(t_fdf *fdf)
 {
 	fdf->fd = open(fdf->filename, O_RDONLY);
 	if (fdf->fd == -1)
-		perror_and_exit("open file error", fdf);
+		perror_and_exit("open file error\n", fdf);
 }
 
 void	close_file(t_fdf *fdf)
@@ -53,5 +52,5 @@ void	close_file(t_fdf *fdf)
 
 	check = close(fdf->fd);
 	if (check == -1)
-		perror_and_exit("close file error", fdf);
+		perror_and_exit("close file error\n", fdf);
 }

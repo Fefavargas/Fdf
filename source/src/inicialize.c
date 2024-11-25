@@ -6,7 +6,7 @@
 /*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/11 13:52:05 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/13 06:31:10 by fefa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	inic_proj_min_max(t_fdf *fdf)
 void	inic_fdf(t_fdf *fdf, char *file)
 {
 	fdf->fd = -1;
-    fdf->filename = file;
+	fdf->filename = file;
 	fdf->camera.z_scale = 0.08;
 	inic_proj_min_max(fdf);
 	fdf->camera.angle = 30;
