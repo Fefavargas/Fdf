@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:00:25 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/13 09:45:36 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/25 16:40:24 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # define SCREEN_UTIL	0.9
 # define Z_S			0.08
 
-# define XK_LEFT			0xff51
+# define XK_LEFT		0xff51
 # define XK_UP			0xff52
 # define XK_RIGHT		0xff53
-# define XK_DOWN			0xff54
+# define XK_DOWN		0xff54
 # define XK_ESCAPE		0xff1b
 # define DESTROY_NOTIFY	17
 

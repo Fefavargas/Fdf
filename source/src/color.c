@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:32:38 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/11 13:40:39 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/25 16:14:00 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_color_code(char *str, char **token_arr, t_fdf *fdf)
 	{
 		i = 1;
 		color = 0;
-		while (str[++i])
+		while (str[++i] && !is_empty(str[i]))
 		{
 			color *= 16;
 			color += get_digit(ft_tolower(str[i]), 16);

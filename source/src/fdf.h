@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/13 07:26:14 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/25 16:20:51 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ typedef struct s_bresen
 
 typedef struct s_camera
 {
-	//int		zoom;
-	//float	x_angle;
-	//float	y_angle;
-	//float	z_angle;
 	float	scale;
 	int		x_offset;
 	int		y_offset;
@@ -77,8 +73,6 @@ typedef struct s_map
 	int	x_max;
 	int	y_max;
 	int	***array;
-	// int	z_min;
-	// int	z_max;
 }	t_map;
 
 typedef struct s_proj
@@ -123,10 +117,8 @@ void	inic_fdf(t_fdf *fdf, char *file);
 void	inic_map_xy_array(t_fdf *fdf);
 void	inic_proj(t_fdf *fdf);
 //util.c
+int		is_empty(char c);
 int		count_words(char *s);
-int		ft_bigger(int x, int y);
-int		ft_smaller(int x, int y);
-float	ft_bigger_float(float x, float y);
 t_point	create_point(int x, int y);
 //projection.c
 void	project(t_fdf *fdf, int angle);

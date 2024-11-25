@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 10:58:30 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/25 16:19:59 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static void	get_extrema(t_fdf *fdf, int angle)
 			x_proj = (x - y) * cos(angle * M_PI / 180);
 			y_proj = (x + y) * sin(angle * M_PI / 180);
 			y_proj -= fdf->map.array[y][x][0] * fdf->camera.z_scale;
-			tmp = ft_bigger_float(x_proj, fdf->proj.x_proj_max);
+			tmp = fmax(x_proj, fdf->proj.x_proj_max);
 			fdf->proj.x_proj_max = tmp;
 			if (x_proj < fdf->proj.x_proj_min)
 				fdf->proj.x_proj_min = x_proj;
-			tmp = ft_bigger_float(y_proj, fdf->proj.y_proj_max);
+			tmp = fmax(y_proj, fdf->proj.y_proj_max);
 			fdf->proj.y_proj_max = tmp;
 			if (y_proj < fdf->proj.y_proj_min)
 				fdf->proj.y_proj_min = y_proj;

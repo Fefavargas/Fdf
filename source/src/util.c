@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:06:52 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/13 06:31:52 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/25 16:20:46 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,4 @@ int	count_words(char *s)
 			i++;
 	}
 	return (count);
-}
-
-int	ft_bigger(int x, int y)
-{
-	if (x > y)
-		return (x);
-	return (y);
-}
-
-int	ft_smaller(int x, int y)
-{
-	if (x < y)
-		return (x);
-	return (y);
-}
-
-float	ft_bigger_float(float x, float y)
-{
-	if (x > y)
-		return (x);
-	return (y);
 }
