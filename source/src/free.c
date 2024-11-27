@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fefa <fefa@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:48:58 by fefa              #+#    #+#             */
-/*   Updated: 2024/11/11 13:49:11 by fefa             ###   ########.fr       */
+/*   Updated: 2024/11/26 18:58:22 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	free_fdf(t_fdf *fdf)
 	if (!fdf)
 		return ;
 	free_mlx(fdf);
-	close (fdf->fd);
+	if (fdf->fd != -1)
+		close (fdf->fd);
 	free_int_array(fdf);
 	free_float_arr(&fdf->proj.x_proj, fdf);
 	free_float_arr(&fdf->proj.y_proj, fdf);

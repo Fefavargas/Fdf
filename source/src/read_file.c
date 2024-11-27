@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:14 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/25 16:14:21 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/26 18:32:07 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	get_value(char *str, t_fdf *fdf, int y)
 	x = -1;
 	token_arr = ft_split(str, ' ');
 	if (!token_arr)
-		perror_and_exit("Error: ft_split()\n", fdf);
+		perror_and_exit("Error: ft_split() ", fdf);
 	while (++x < fdf->map.x_max)
 	{
 		fdf->map.array[y][x][0] = ft_atoi(token_arr[x]);

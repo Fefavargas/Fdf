@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:02:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 16:37:29 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/26 19:26:10 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,9 @@ void	inic_fdf(t_fdf *fdf, char *file)
 	inic_proj_min_max(fdf);
 	fdf->camera.angle = 30;
 	fdf->mlx = NULL;
-	fdf->mlx = mlx_init();
-	if (!fdf->mlx)
-		msg_and_exit("Error: mlx inicialize.\n", fdf);
-	fdf->win = mlx_new_window(fdf->mlx, WINDOW_W, WINDOW_H, WINDOW_TITLE);
-	if (!fdf->win)
-		msg_and_exit("Error: window inicialize.\n", fdf);
-	fdf->img.img = mlx_new_image(fdf->mlx, WINDOW_W, WINDOW_H);
-	if (!fdf->win)
-		msg_and_exit("Error: image initializing", fdf);
-	fdf->img.data = mlx_get_data_addr(fdf->img.img, &fdf->img.bpp,
-			&fdf->img.size_len, &fdf->img.endian);
+	fdf->map.array = NULL;
+	fdf->proj.x_proj = NULL;
+	fdf->proj.y_proj = NULL;
 }
 
 void	init_array(t_fdf *fdf)

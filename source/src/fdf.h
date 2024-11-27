@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 17:20:32 by fvargas           #+#    #+#             */
-/*   Updated: 2024/11/25 16:20:51 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/26 19:15:54 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ typedef struct s_bresen
 	int		sx;
 	int		sy;
 }	t_bresen;
-
-// typedef struct s_mouse
-// {
-// 	int	button;
-// 	int	x;
-// 	int	y;
-// 	int	prev_x;
-// 	int	prev_y;
-// }	t_mouse;
 
 typedef struct s_camera
 {
@@ -120,6 +111,7 @@ void	inic_proj(t_fdf *fdf);
 int		is_empty(char c);
 int		count_words(char *s);
 t_point	create_point(int x, int y);
+void	inic_mlx(t_fdf *fdf);
 //projection.c
 void	project(t_fdf *fdf, int angle);
 //hook.c

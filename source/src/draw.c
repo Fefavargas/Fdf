@@ -6,7 +6,7 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:12:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 16:20:33 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:16:51 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	init_bresenham(t_bresen *bresen, t_fdf *fdf, t_point s, t_point e)
 	bresen->y0 = (int)fdf->proj.y_proj[s.y][s.x];
 	bresen->x1 = (int)fdf->proj.x_proj[e.y][e.x];
 	bresen->y1 = (int)fdf->proj.y_proj[e.y][e.x];
-	bresen->dx = fmax(bresen->x0 - bresen->x1, bresen->x1 - bresen->x0);
-	bresen->dy = fmax(bresen->y0 - bresen->y1, bresen->y1 - bresen->y0);
+	bresen->dx = fabs(bresen->x0 - bresen->x1);
+	bresen->dy = fabs(bresen->y0 - bresen->y1);
 	bresen->sx = -1;
 	if (bresen->x0 < bresen->x1)
 		bresen->sx = 1;

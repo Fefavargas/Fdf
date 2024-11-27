@@ -6,20 +6,11 @@
 /*   By: fvargas <fvargas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:50:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 16:19:59 by fvargas          ###   ########.fr       */
+/*   Updated: 2024/11/27 10:55:03 by fvargas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-t_point	create_point(int x, int y)
-{
-	t_point	p;
-
-	p.x = x;
-	p.y = y;
-	return (p);
-}
 
 static void	get_extrema(t_fdf *fdf, int angle)
 {
@@ -38,14 +29,10 @@ static void	get_extrema(t_fdf *fdf, int angle)
 			x_proj = (x - y) * cos(angle * M_PI / 180);
 			y_proj = (x + y) * sin(angle * M_PI / 180);
 			y_proj -= fdf->map.array[y][x][0] * fdf->camera.z_scale;
-			tmp = fmax(x_proj, fdf->proj.x_proj_max);
-			fdf->proj.x_proj_max = tmp;
-			if (x_proj < fdf->proj.x_proj_min)
-				fdf->proj.x_proj_min = x_proj;
-			tmp = fmax(y_proj, fdf->proj.y_proj_max);
-			fdf->proj.y_proj_max = tmp;
-			if (y_proj < fdf->proj.y_proj_min)
-				fdf->proj.y_proj_min = y_proj;
+			fdf->proj.x_proj_max = fmax(x_proj, fdf->proj.x_proj_max);
+			fdf->proj.x_proj_min = fmin(x_proj, fdf->proj.x_proj_min);
+			fdf->proj.y_proj_max = fmax(y_proj, fdf->proj.y_proj_max);
+			fdf->proj.y_proj_min = fmin(y_proj, fdf->proj.y_proj_min);
 		}
 	}
 }
@@ -63,10 +50,7 @@ static void	get_scale(t_fdf *fdf, int angle)
 	y_range = fdf->proj.y_proj_max - fdf->proj.y_proj_min;
 	x_scale = WINDOW_W / x_range * SCREEN_UTIL;
 	y_scale = WINDOW_H / y_range * SCREEN_UTIL;
-	scale = y_scale;
-	if (x_scale < y_scale)
-		scale = x_scale;
-	fdf->camera.scale = scale;
+	fdf->camera.scale = fmin(y_scale, x_scale);
 }
 
 static void	get_offset(t_fdf *fdf)
